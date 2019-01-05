@@ -12,7 +12,7 @@
 		<div><div style="width:300px;">
 			<h1 style="background-color:blue;"><font color="white">YewGo搜索</font></h1></div>
 			<div>
-				<input name="kw" id="tid" style="width:300px;height:20px"><input type="button" value="新的征程">
+				<input type="text" value="1" name="kw" id="tid" style="width:300px;height:20px"><input type="button" value="新的征程">
 			</div>
 			<div id="did" style="border: 1px solid gray;width: 300px;position:relative;left:-34px;display:none"></div>
 		</div> 
@@ -24,17 +24,14 @@ $(function(){
 		//alert(11);
 		$.post("${pageContext.request.contextPath}/kw","kw="+$("#tid").val(),function(obj){
 		$("#did").html("");
+			//var n=1;
 		if(obj!=""){
 		$(obj).each(function(){
 			//alert(this);
-			var n=1;
-			$("#did").append("<div onmouseover='over(this)' onmouseout='out(this)' name="+n+">"+this+"</div>");
+			$("#did").append("<div onmouseover='over(this)' onmouseout='out(this)' onclick='cli(this)'>"+this+"</div>");
 			$("#did").show();
-			n++;
-			$("[name=n]").click(function(){
-				alert(1);
-				$("#tid").val($("[name=n]").val());
-			})
+			//n++;
+			
 		})
 		}else{
 			$("#did").hide();
@@ -47,11 +44,14 @@ $(function(){
 <script type="text/javascript" >
 function over(obj){
 	$(obj).css("background-color","gainsboro");
+	
 }
 function out(obj){
 	$(obj).css("background-color","white");
 }
-
+function cli(obj){
+	$("#tid").val($(obj).html());
+}
 
 </script>
 </html>
